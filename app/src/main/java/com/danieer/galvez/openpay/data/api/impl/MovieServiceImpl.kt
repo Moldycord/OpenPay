@@ -13,4 +13,9 @@ class MovieServiceImpl @Inject constructor(
         val result = apiService.getMovieByName(nameOrId)
         emit(result)
     }
+
+    fun getPopularMovies() = flow<MoviesResponse> {
+        val result = apiService.getPopularMovies()
+        emit(result)
+    }
 }

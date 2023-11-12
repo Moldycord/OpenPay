@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.danieer.galvez.openpay.presentation.di.annotations.ViewModelKey
 import com.danieer.galvez.openpay.presentation.di.factory.ViewModelFactory
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MovieSearchViewModel
+import com.danieer.galvez.openpay.presentation.ui.viewmodel.MoviesFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -19,4 +20,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MovieSearchViewModel::class)
     abstract fun bindHomeViewModel(viewModel: MovieSearchViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MoviesFragmentViewModel::class)
+    abstract fun bindMoviesFragmentViewModel(viewModel: MoviesFragmentViewModel): ViewModel
 }

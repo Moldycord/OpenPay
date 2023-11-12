@@ -11,4 +11,7 @@ class MovieRepository @Inject constructor(
 
     fun getMovieByName(name: String): Flow<MoviesResponse> =
         movieApiService.getMovieByName(name)
+
+    fun getPopularMovies(): Flow<MoviesResponse> =
+        movieApiService.getPopularMovies()
 }

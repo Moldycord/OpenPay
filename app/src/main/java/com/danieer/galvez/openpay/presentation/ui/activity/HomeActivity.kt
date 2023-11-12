@@ -13,12 +13,11 @@ import com.danieer.galvez.openpay.R
 import com.danieer.galvez.openpay.data.entities.Movie
 import com.danieer.galvez.openpay.databinding.HomeActivityBinding
 import com.danieer.galvez.openpay.presentation.di.factory.ViewModelFactory
-import com.danieer.galvez.openpay.presentation.mappers.MoviesAdapter
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MovieSearchViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), MoviesAdapter.ClickListener {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var homeBinding: HomeActivityBinding
 
@@ -26,9 +25,8 @@ class HomeActivity : AppCompatActivity(), MoviesAdapter.ClickListener {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var viewModel: MovieSearchViewModel
+    private lateinit var viewModel: MovieSearchViewModel
 
-    private var moviesAdapter = MoviesAdapter(this)
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -42,8 +40,6 @@ class HomeActivity : AppCompatActivity(), MoviesAdapter.ClickListener {
 
 
         viewModel = ViewModelProvider(this, viewModelFactory)[MovieSearchViewModel::class.java]
-        setupViews()
-        setupObservers()
         setupNavigation()
     }
 
@@ -62,34 +58,11 @@ class HomeActivity : AppCompatActivity(), MoviesAdapter.ClickListener {
         homeBinding.bottomNavigation.setupWithNavController(navController)
     }
 
-    private fun setupViews() {/* homeBinding.run {
-             recyclerViewMovies.apply {
-                 layoutManager = LinearLayoutManager(this@HomeActivity)
-                 adapter = moviesAdapter
-             }
-             editTextSearch.addTextChangedListener {
-                 Executors.newSingleThreadScheduledExecutor().schedule({
-                     viewModel.getMovieByName(it.toString())
-                 }, 2, TimeUnit.SECONDS)
-             }
-         } */
-    }
-
-    private fun setupObservers() {
-        viewModel.moviesData.observe(this) {
-            moviesAdapter.setMovieList(it.movies)
-        }
-    }
-
 
     private fun goToDetails(movie: Movie) {
         val intent = Intent(this, MovieDetailActivity::class.java)
         intent.putExtra("MOVIE", movie)
         startActivity(intent)
-    }
-
-    override fun onElementClicked(movie: Movie) {
-        goToDetails(movie)
     }
 
     override fun onSupportNavigateUp(): Boolean {

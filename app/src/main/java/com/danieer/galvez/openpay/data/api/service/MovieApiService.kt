@@ -12,7 +12,12 @@ interface MovieApiService {
         @Query("include_adult") includeAdult: Boolean = false,
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1,
-        @Query("api_key") apiKey:String ="7a03adca4702ab3dc849545e0c707d60"
+        @Query("api_key") apiKey: String = "7a03adca4702ab3dc849545e0c707d60"
     ): MoviesResponse
 
+
+    @GET("movie/popular")
+    suspend fun getPopularMovies(
+        @Query("api_key") apiKey: String = "7a03adca4702ab3dc849545e0c707d60"
+    ): MoviesResponse
 }
