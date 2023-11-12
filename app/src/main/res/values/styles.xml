@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!-- Style text-->
+    <style name="Base_Text">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Header_Text" parent="Base_Text">
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Header_Text.White" parent="Header_Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Base_Text.White" parent="Base_Text">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="H2_Text.White" parent="Base_Text.White">
+        <item name="android:textSize">35sp</item>
+    </style>
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MovieApplication</string>
+
+    <string name="search_description">Search for a Movie by Name</string>
+
+    <string name="movie_details_str">Movie Details</string>
+    <string name="hint_text">The avengers</string>
+
+    <!--Home Menu -->
+
+    <string name="profile_section" translatable="false">Perfil</string>
+    <string name="movies_section" translatable="false">Películas</string>
+    <string name="map_section" translatable="false">Mapa</string>
+    <string name="upload_img_section" translatable="false">Imágenes</string>
+
+</resources>

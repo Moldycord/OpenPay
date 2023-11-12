@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_nav_graph"
+    app:startDestination="@id/navigation_movies">
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.danieer.galvez.openpay.presentation.ui.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+
+    <fragment
+        android:id="@+id/navigation_movies"
+        android:name="com.danieer.galvez.openpay.presentation.ui.fragments.MoviesFragment"
+        android:label="MoviesFragment" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.danieer.galvez.openpay.presentation.ui.fragments.MapFragment"
+        android:label="MapFragment" />
+
+    <fragment
+        android:id="@+id/navigation_upload"
+        android:name="com.danieer.galvez.openpay.presentation.ui.fragments.UploadImageFragment"
+        android:label="UploadFragment" />
+
+</navigation>
