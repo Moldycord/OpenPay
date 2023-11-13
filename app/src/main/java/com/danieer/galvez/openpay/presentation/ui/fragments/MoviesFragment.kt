@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.danieer.galvez.openpay.data.entities.Movie
 import com.danieer.galvez.openpay.databinding.FragmentMoviesBinding
 import com.danieer.galvez.openpay.presentation.di.factory.ViewModelFactory
+import com.danieer.galvez.openpay.presentation.mappers.DataState
 import com.danieer.galvez.openpay.presentation.mappers.HorizontalMoviesAdapter
 import com.danieer.galvez.openpay.presentation.mappers.MoviesAdapter
 import com.danieer.galvez.openpay.presentation.ui.activity.MovieDetailActivity
@@ -30,6 +31,8 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
     private lateinit var viewModel: MoviesFragmentViewModel
 
     private var moviesAdapter = HorizontalMoviesAdapter(this)
+    private var ratedMoviesAdapter = HorizontalMoviesAdapter(this)
+    private var upcomingMoviesAdapter = HorizontalMoviesAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -49,19 +52,48 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
         setupViews()
         setupObservers()
         viewModel.getPopularMovies()
+        viewModel.getRatedMovies()
     }
 
     private fun setupViews() {
-        binding.recyclerViewPopularMovies.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = moviesAdapter
+        binding.run {
+            recyclerViewPopularMovies.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = moviesAdapter
+            }
+            recyclerViewRatedMovies.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = ratedMoviesAdapter
+            }
+            recyclerViewUpcomingMovies.apply {
+                layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                adapter = upcomingMoviesAdapter
+            }
         }
     }
 
     private fun setupObservers() {
         viewModel.moviesData.observe(viewLifecycleOwner) {
             moviesAdapter.setMovieList(it.movies.take(5))
+        }
+        viewModel.ratedMoviesData.observe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Loading -> Unit
+                is DataState.Success -> ratedMoviesAdapter.setMovieList(it.data.movies.take(5))
+                is DataState.Error -> {
+                    hideSection()
+                }
+            }
+        }
+    }
+
+    private fun hideSection() {
+        binding.apply {
+            textViewRated.visibility = View.INVISIBLE
+            recyclerViewRatedMovies.visibility = View.INVISIBLE
         }
     }
 

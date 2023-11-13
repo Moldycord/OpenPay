@@ -13,4 +13,8 @@
     <string name="map_section" translatable="false">Mapa</string>
     <string name="upload_img_section" translatable="false">Imágenes</string>
 
+    <string name="movies_popular_title" translatable="false">Más populares</string>
+    <string name="movies_most_rated" translatable="false">Más votadas</string>
+    <string name="movies_upcoming" translatable="false">Recomendadas</string>
+
 </resources>

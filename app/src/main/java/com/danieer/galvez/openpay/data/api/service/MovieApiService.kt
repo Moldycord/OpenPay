@@ -20,4 +20,11 @@ interface MovieApiService {
     suspend fun getPopularMovies(
         @Query("api_key") apiKey: String = "7a03adca4702ab3dc849545e0c707d60"
     ): MoviesResponse
+
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("api_key") apiKey: String = "7a03adca4702ab3dc849545e0c707d60",
+        @Query("per_page") itemsByPage: Int = 20
+    ): MoviesResponse
 }

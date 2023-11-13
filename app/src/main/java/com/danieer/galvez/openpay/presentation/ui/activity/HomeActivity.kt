@@ -1,6 +1,5 @@
 package com.danieer.galvez.openpay.presentation.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -10,7 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.danieer.galvez.openpay.R
-import com.danieer.galvez.openpay.data.entities.Movie
 import com.danieer.galvez.openpay.databinding.HomeActivityBinding
 import com.danieer.galvez.openpay.presentation.di.factory.ViewModelFactory
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MovieSearchViewModel
@@ -54,15 +52,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.navigation_upload
         ).build()
 
-        //  setupActionBarWithNavController(navController, appBarConfiguration)
         homeBinding.bottomNavigation.setupWithNavController(navController)
-    }
-
-
-    private fun goToDetails(movie: Movie) {
-        val intent = Intent(this, MovieDetailActivity::class.java)
-        intent.putExtra("MOVIE", movie)
-        startActivity(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,6 +61,5 @@ class HomeActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
-
 
 }

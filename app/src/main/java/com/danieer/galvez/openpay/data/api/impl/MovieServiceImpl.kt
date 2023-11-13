@@ -18,4 +18,5 @@ class MovieServiceImpl @Inject constructor(
         val result = apiService.getPopularMovies()
         emit(result)
     }
+
 }
