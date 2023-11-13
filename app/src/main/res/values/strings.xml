@@ -17,4 +17,7 @@
     <string name="movies_most_rated" translatable="false">Más votadas</string>
     <string name="movies_upcoming" translatable="false">Recomendadas</string>
 
+    <string name="map_service_title" translatable="false">Servicio de ubicación</string>
+    <string name="map_service_description" translatable="false">Se está ejecutando el servicio para guardar la ubicación</string>
+
 </resources>

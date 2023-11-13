@@ -2,6 +2,9 @@ package com.danieer.galvez.openpay.presentation.application
 
 import android.app.Application
 import android.content.Intent
+import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.danieer.galvez.openpay.domain.service.SaveUserLocationService
@@ -21,6 +24,7 @@ class MovieAppApplication : Application(), HasAndroidInjector, HasSupportFragmen
     @Inject
     lateinit var dispatchingFragmentInjector: DispatchingAndroidInjector<Fragment>
 
+
     override fun onCreate() {
         super.onCreate()
         DaggerAppComponent.builder()
@@ -31,6 +35,14 @@ class MovieAppApplication : Application(), HasAndroidInjector, HasSupportFragmen
 
         val serviceIntent = Intent(this, SaveUserLocationService::class.java)
         ContextCompat.startForegroundService(this, serviceIntent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Handler(Looper.getMainLooper()).post {
+                ContextCompat.startForegroundService(this, serviceIntent)
+
+            }
+        } else {
+            ContextCompat.startForegroundService(this, serviceIntent)
+        }
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

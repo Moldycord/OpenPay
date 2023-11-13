@@ -2,7 +2,6 @@ package com.danieer.galvez.openpay.presentation.ui.fragments
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
@@ -122,7 +121,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             override fun onLocationResult(p0: LocationResult) {
                 p0.lastLocation?.let {
                     updateMapLocation(it.latitude, it.longitude)
-
                 }
             }
         }
@@ -142,8 +140,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 locationRequest, locationCallback, Looper.getMainLooper()
             )
         }
-
-
     }
 
     private fun updateMapLocation(latitude: Double, longitude: Double) {
@@ -151,7 +147,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         gMap.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).title("Your Location"))
         gMap.moveCamera(CameraUpdateFactory.newLatLng(currentLatLng))
         gMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
-        saveLocationToFirestore(latitude, longitude)
+        context?.let {
+            saveLocationToFirestore(latitude, longitude)
+        }
     }
 
     private fun saveLocationToFirestore(latitude: Double, longitude: Double) {
@@ -165,6 +163,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             Toast.makeText(requireContext(), "Location cannot be saved", Toast.LENGTH_LONG)
         }
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
     }
 
     companion object {
