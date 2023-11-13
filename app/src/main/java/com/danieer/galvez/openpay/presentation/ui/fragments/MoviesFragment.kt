@@ -53,6 +53,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
         setupObservers()
         viewModel.getPopularMovies()
         viewModel.getRatedMovies()
+        viewModel.getUpcomingMovies()
     }
 
     private fun setupViews() {
@@ -88,12 +89,28 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
                 }
             }
         }
+        viewModel.upcomingMoviesData.observe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Loading -> Unit
+                is DataState.Success -> upcomingMoviesAdapter.setMovieList(it.data.movies.take(5))
+                is DataState.Error -> {
+                    hideUpcomingSection()
+                }
+            }
+        }
     }
 
     private fun hideSection() {
         binding.apply {
             textViewRated.visibility = View.INVISIBLE
             recyclerViewRatedMovies.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun hideUpcomingSection() {
+        binding.apply {
+            textViewUpcoming.visibility = View.INVISIBLE
+            recyclerViewUpcomingMovies.visibility = View.INVISIBLE
         }
     }
 

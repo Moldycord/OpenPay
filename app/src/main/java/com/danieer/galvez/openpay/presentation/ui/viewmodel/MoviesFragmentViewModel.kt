@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.danieer.galvez.openpay.data.entities.MoviesResponse
 import com.danieer.galvez.openpay.domain.GetPopularMoviesUseCase
 import com.danieer.galvez.openpay.domain.GetRatedMoviesUseCase
+import com.danieer.galvez.openpay.domain.GetUpcomingMoviesUseCase
 import com.danieer.galvez.openpay.presentation.mappers.DataState
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class MoviesFragmentViewModel @Inject constructor(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    private val getRatedMoviesUseCase: GetRatedMoviesUseCase
+    private val getRatedMoviesUseCase: GetRatedMoviesUseCase,
+    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
 ) : ViewModel() {
 
     private val _movieData = MutableLiveData<MoviesResponse>()
@@ -23,6 +25,10 @@ class MoviesFragmentViewModel @Inject constructor(
 
     private val _ratedMovies = MutableLiveData<DataState<MoviesResponse>>()
     val ratedMoviesData: LiveData<DataState<MoviesResponse>> get() = _ratedMovies
+
+    private val _upcomingMovies = MutableLiveData<DataState<MoviesResponse>>()
+    val upcomingMoviesData: LiveData<DataState<MoviesResponse>> get() = _upcomingMovies
+
 
     fun getPopularMovies() {
         getPopularMoviesUseCase().onEach {
@@ -33,6 +39,12 @@ class MoviesFragmentViewModel @Inject constructor(
     fun getRatedMovies() {
         getRatedMoviesUseCase().onEach {
             _ratedMovies.value = it
+        }.catch { println(it.message) }.launchIn(viewModelScope)
+    }
+
+    fun getUpcomingMovies() {
+        getUpcomingMoviesUseCase().onEach {
+            _upcomingMovies.value = it
         }.catch { println(it.message) }.launchIn(viewModelScope)
     }
 

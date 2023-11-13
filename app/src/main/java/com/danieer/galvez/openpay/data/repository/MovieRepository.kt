@@ -9,15 +9,12 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
-    private val movieApiService: MovieServiceImpl,
-    private val movieApiService2: MovieApiService
+    private val movieApiService: MovieServiceImpl, private val movieApiService2: MovieApiService
 ) {
 
-    fun getMovieByName(name: String): Flow<MoviesResponse> =
-        movieApiService.getMovieByName(name)
+    fun getMovieByName(name: String): Flow<MoviesResponse> = movieApiService.getMovieByName(name)
 
-    fun getPopularMovies(): Flow<MoviesResponse> =
-        movieApiService.getPopularMovies()
+    fun getPopularMovies(): Flow<MoviesResponse> = movieApiService.getPopularMovies()
 
     fun getRatedMovies(): Flow<DataState<MoviesResponse>> = flow {
 
@@ -27,6 +24,17 @@ class MovieRepository @Inject constructor(
             val result = movieApiService2.getTopRatedMovies()
             emit(DataState.Success(result))
 
+        } catch (e: Exception) {
+            emit(DataState.Error(e))
+        }
+    }
+
+    fun getUpcomingMovies(): Flow<DataState<MoviesResponse>> = flow {
+        emit(DataState.Loading)
+        try {
+            val result = movieApiService2.getUpcomingMovies()
+
+            emit(DataState.Success(result))
         } catch (e: Exception) {
             emit(DataState.Error(e))
         }
