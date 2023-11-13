@@ -41,5 +41,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA9xOV4vF2D_OI_r4nznNC6gNDzv8OpvKs" />
+
+        <service
+            android:name=".domain.service.SaveUserLocationService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 </manifest>

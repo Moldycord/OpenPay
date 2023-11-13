@@ -1,7 +1,10 @@
 package com.danieer.galvez.openpay.presentation.application
 
 import android.app.Application
+import android.content.Intent
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.danieer.galvez.openpay.domain.service.SaveUserLocationService
 import com.danieer.galvez.openpay.presentation.di.DaggerAppComponent
 import com.google.firebase.FirebaseApp
 import dagger.android.AndroidInjector
@@ -25,6 +28,9 @@ class MovieAppApplication : Application(), HasAndroidInjector, HasSupportFragmen
             .build()
             .inject(this)
         FirebaseApp.initializeApp(this)
+
+        val serviceIntent = Intent(this, SaveUserLocationService::class.java)
+        ContextCompat.startForegroundService(this, serviceIntent)
     }
 
     override fun androidInjector(): AndroidInjector<Any> {

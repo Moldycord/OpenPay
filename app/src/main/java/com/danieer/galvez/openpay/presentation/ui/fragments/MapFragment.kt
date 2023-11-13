@@ -2,6 +2,7 @@ package com.danieer.galvez.openpay.presentation.ui.fragments
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Looper
@@ -101,7 +102,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
@@ -128,7 +128,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         }
         val locationRequest = LocationRequest.create().apply {
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 500000
+            interval = 10000
         }
 
 
