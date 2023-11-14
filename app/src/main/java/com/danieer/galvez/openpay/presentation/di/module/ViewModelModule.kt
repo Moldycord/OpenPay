@@ -7,6 +7,7 @@ import com.danieer.galvez.openpay.presentation.di.factory.ViewModelFactory
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MapFragmentViewModel
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MovieSearchViewModel
 import com.danieer.galvez.openpay.presentation.ui.viewmodel.MoviesFragmentViewModel
+import com.danieer.galvez.openpay.presentation.ui.viewmodel.UploadImageFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -31,4 +32,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MapFragmentViewModel::class)
     abstract fun bindMapFragmentViewModel(viewModel: MapFragmentViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UploadImageFragmentViewModel::class)
+    abstract fun bindUploadImageFragmentViewModel(viewModel: UploadImageFragmentViewModel): ViewModel
 }

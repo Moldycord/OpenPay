@@ -13,4 +13,6 @@
     <dimen name="base_text_size">16sp</dimen>
     <dimen name="h1_text_size">40sp</dimen>
     <dimen name="h2_text_size">30sp</dimen>
+
+    <dimen name="rounded_corner">50dp</dimen>
 </resources>

@@ -20,4 +20,12 @@
     <string name="map_service_title" translatable="false">Servicio de ubicación</string>
     <string name="map_service_description" translatable="false">Se está ejecutando el servicio para guardar la ubicación</string>
 
+    <string name="upload_img_title" translatable="false">Subir imagen</string>
+    <string name="upload_img_description" translatable="false">Aquí puedes seleccionar una imagen de tu galería para guardarla en firebase</string>
+
+    <string name="select_img_button">Seleccionar</string>
+    <string name="upload_img_button">Subir</string>
+
+    <string name="uploaded_img_successfully">Se guardó la imagen correctamente</string>
+    <string name="uploaded_img_error">Hubo un error al subir tu imagen, inténtalo de nuevo</string>
 </resources>
