@@ -27,7 +27,7 @@ Utilicé mis previos conocimientos y experiencia sobre librerías estandar como
  entre otras, también mis conocimientos en patrones de arquitectura y de diseño.
 Espero poder llenar las espectativas y sin duda con más tiempo podría lograr una aplicación mucho más robusta 
 * pero con este trabajo espero demostrar mis conocimientos y experiencia a lo largo de mi trayectoria profesional
-https://drive.google.com/file/d/1zr-XKdyGaTdLbGfDsNfJdw0UPwYTd97T/view?usp=sharing
+  https://drive.google.com/drive/folders/1WZVycRiusHXeQrWoUZMeFZAYqaud0kON?usp=sharing
 
 
 Danieer Alexis Galvez Barradas
