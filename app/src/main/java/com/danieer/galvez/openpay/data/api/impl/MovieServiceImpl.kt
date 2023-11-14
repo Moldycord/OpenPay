@@ -14,9 +14,6 @@ class MovieServiceImpl @Inject constructor(
         emit(result)
     }
 
-    fun getPopularMovies() = flow<MoviesResponse> {
-        val result = apiService.getPopularMovies()
-        emit(result)
-    }
+    suspend fun getPopularMovies(): MoviesResponse = apiService.getPopularMovies()
 
 }

@@ -30,20 +30,20 @@ class MoviesFragmentViewModel @Inject constructor(
     val upcomingMoviesData: LiveData<DataState<MoviesResponse>> get() = _upcomingMovies
 
 
-    fun getPopularMovies() {
-        getPopularMoviesUseCase().onEach {
+    fun getPopularMovies(isInternedConnect: Boolean) {
+        getPopularMoviesUseCase(isInternedConnect).onEach {
             _movieData.value = it
         }.catch { println(it.message) }.launchIn(viewModelScope)
     }
 
-    fun getRatedMovies() {
-        getRatedMoviesUseCase().onEach {
+    fun getRatedMovies(isInternedConnect: Boolean) {
+        getRatedMoviesUseCase(isInternedConnect).onEach {
             _ratedMovies.value = it
         }.catch { println(it.message) }.launchIn(viewModelScope)
     }
 
-    fun getUpcomingMovies() {
-        getUpcomingMoviesUseCase().onEach {
+    fun getUpcomingMovies(isInternedConnect: Boolean) {
+        getUpcomingMoviesUseCase(isInternedConnect).onEach {
             _upcomingMovies.value = it
         }.catch { println(it.message) }.launchIn(viewModelScope)
     }

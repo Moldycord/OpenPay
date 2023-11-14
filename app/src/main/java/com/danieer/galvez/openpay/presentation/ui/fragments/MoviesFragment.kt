@@ -2,6 +2,9 @@ package com.danieer.galvez.openpay.presentation.ui.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,9 +54,9 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
         viewModel = ViewModelProvider(this, viewModelFactory)[MoviesFragmentViewModel::class.java]
         setupViews()
         setupObservers()
-        viewModel.getPopularMovies()
-        viewModel.getRatedMovies()
-        viewModel.getUpcomingMovies()
+        viewModel.getPopularMovies(isNetworkAvailable())
+        viewModel.getRatedMovies(isNetworkAvailable())
+        viewModel.getUpcomingMovies(isNetworkAvailable())
     }
 
     private fun setupViews() {
@@ -87,6 +90,8 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
                 is DataState.Error -> {
                     hideSection()
                 }
+
+                else -> Unit
             }
         }
         viewModel.upcomingMoviesData.observe(viewLifecycleOwner) {
@@ -96,6 +101,8 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
                 is DataState.Error -> {
                     hideUpcomingSection()
                 }
+
+                else -> Unit
             }
         }
     }
@@ -122,5 +129,25 @@ class MoviesFragment : Fragment(), MoviesAdapter.ClickListener {
         val intent = Intent(requireContext(), MovieDetailActivity::class.java)
         intent.putExtra("MOVIE", movie)
         startActivity(intent)
+    }
+
+    private fun isNetworkAvailable(): Boolean {
+        val connectivityManager =
+            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val networkCapabilities = connectivityManager.activeNetwork ?: return false
+            val activeNetwork =
+                connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                else -> false
+            }
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
+        }
     }
 }

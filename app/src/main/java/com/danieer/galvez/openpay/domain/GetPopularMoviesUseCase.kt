@@ -11,8 +11,6 @@ class GetPopularMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository,
     private val dispatcher: CoroutineDispatcher
 ) {
-
-    operator fun invoke(): Flow<MoviesResponse> =
-        movieRepository.getPopularMovies().flowOn(context = dispatcher)
-
+    operator fun invoke(isInternetConnected: Boolean): Flow<MoviesResponse> =
+        movieRepository.getPopularMovies(isInternetConnected).flowOn(context = dispatcher)
 }

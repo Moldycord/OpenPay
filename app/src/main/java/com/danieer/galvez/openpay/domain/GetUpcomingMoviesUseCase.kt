@@ -12,6 +12,6 @@ class GetUpcomingMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository, private val dispatcher: CoroutineDispatcher
 ) {
 
-    operator fun invoke(): Flow<DataState<MoviesResponse>> =
-        movieRepository.getUpcomingMovies().flowOn(context = dispatcher)
+    operator fun invoke(isInternedConnected: Boolean): Flow<DataState<MoviesResponse>> =
+        movieRepository.getUpcomingMovies(isInternedConnected).flowOn(context = dispatcher)
 }

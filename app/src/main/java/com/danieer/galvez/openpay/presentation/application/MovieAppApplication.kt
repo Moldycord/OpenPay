@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.danieer.galvez.openpay.data.di.RoomModule
 import com.danieer.galvez.openpay.domain.service.SaveUserLocationService
 import com.danieer.galvez.openpay.presentation.di.DaggerAppComponent
 import com.google.firebase.FirebaseApp

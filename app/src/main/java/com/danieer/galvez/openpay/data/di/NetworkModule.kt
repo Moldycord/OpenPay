@@ -1,7 +1,10 @@
 package com.danieer.galvez.openpay.data.di
 
 import android.app.Application
+import androidx.room.Room
 import com.danieer.galvez.openpay.data.api.service.MovieApiService
+import com.danieer.galvez.openpay.data.room.MoviesDao
+import com.danieer.galvez.openpay.data.room.MoviesDataBase
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineDispatcher
@@ -38,9 +41,8 @@ class NetworkModule {
 
         val headerInterceptor: Interceptor = object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
-                val newRequest = chain.request().newBuilder()
-                    .addHeader("accept", "application/json")
-                    .addHeader(
+                val newRequest =
+                    chain.request().newBuilder().addHeader("accept", "application/json").addHeader(
                         "Authorization",
                         "Bearer" + "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3YTAzYWRjYTQ3MDJhYjNkYzg0OTU0NWUwYzcwN2Q2MCIsInN1YiI6IjVjZTczYjYyYzNhMzY4MmFhZjFkYzhkMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.aQUyXEQleDmC4yoJUueKu3Uf0rPzMJRSrtZceLHrh3E"
                     ).build()
@@ -50,19 +52,14 @@ class NetworkModule {
         }
 
         return OkHttpClient.Builder().addInterceptor(loggingInterceptor)
-            .addInterceptor(headerInterceptor)
-            .cache(cache)
-            .build()
+            .addInterceptor(headerInterceptor).cache(cache).build()
     }
 
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, baseUrl: String): Retrofit {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
-            .client(okHttpClient)
-            .build()
+        return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(baseUrl).client(okHttpClient).build()
     }
 
     @Provides
@@ -71,6 +68,7 @@ class NetworkModule {
 
     @Provides
     fun provideDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
 
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"

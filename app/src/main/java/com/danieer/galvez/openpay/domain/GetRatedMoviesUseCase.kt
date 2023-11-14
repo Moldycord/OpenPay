@@ -12,6 +12,6 @@ class GetRatedMoviesUseCase @Inject constructor(
     private val movieRepository: MovieRepository, private val dispatcher: CoroutineDispatcher
 ) {
 
-    operator fun invoke(): Flow<DataState<MoviesResponse>> =
-        movieRepository.getRatedMovies().flowOn(context = dispatcher)
+    operator fun invoke(isInternetConnected: Boolean): Flow<DataState<MoviesResponse>> =
+        movieRepository.getRatedMovies(isInternetConnected).flowOn(context = dispatcher)
 }
