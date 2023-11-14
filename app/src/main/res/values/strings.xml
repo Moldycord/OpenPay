@@ -28,4 +28,7 @@
 
     <string name="uploaded_img_successfully">Se guardó la imagen correctamente</string>
     <string name="uploaded_img_error">Hubo un error al subir tu imagen, inténtalo de nuevo</string>
+
+    <string name="profile_title" translatable="false">Perfil</string>
+    <string name="profile_description" translatable="false">Inicia sesión para poder ver un resumen de tus reseñas, favoritos,etc.</string>
 </resources>
